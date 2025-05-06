@@ -15,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::with('permissions')->get();
-        
+
         return Inertia::render('Roles/Index', [
             'roles' => $roles
         ]);
@@ -27,7 +27,7 @@ class RoleController extends Controller
     public function create()
     {
         $permissions = Permission::all();
-        
+
         return Inertia::render('Roles/Create', [
             'permissions' => $permissions
         ]);
@@ -44,7 +44,7 @@ class RoleController extends Controller
         ]);
 
         $role = Role::create(['name' => $validated['name']]);
-        
+
         if (isset($validated['permissions'])) {
             $role->syncPermissions($validated['permissions']);
         }
@@ -60,7 +60,7 @@ class RoleController extends Controller
     {
         $permissions = Permission::all();
         $role->load('permissions');
-        
+
         return Inertia::render('Roles/Edit', [
             'role' => $role,
             'permissions' => $permissions
@@ -78,7 +78,7 @@ class RoleController extends Controller
         ]);
 
         $role->update(['name' => $validated['name']]);
-        
+
         if (isset($validated['permissions'])) {
             $role->syncPermissions($validated['permissions']);
         }

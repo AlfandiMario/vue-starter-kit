@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::with('roles')->get();
-        
+
         return Inertia::render('Users/Index', [
             'users' => $users
         ]);
@@ -29,7 +29,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        
+
         return Inertia::render('Users/Create', [
             'roles' => $roles
         ]);
@@ -52,7 +52,7 @@ class UserController extends Controller
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
-        
+
         if (isset($validated['roles'])) {
             $user->syncRoles($validated['roles']);
         }
@@ -68,7 +68,7 @@ class UserController extends Controller
     {
         $roles = Role::all();
         $user->load('roles');
-        
+
         return Inertia::render('Users/Edit', [
             'user' => $user,
             'roles' => $roles
@@ -85,24 +85,24 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'roles' => 'array'
         ];
-        
+
         if ($request->filled('password')) {
             $rules['password'] = ['required', Password::defaults()];
         }
-        
+
         $validated = $request->validate($rules);
-        
+
         $user->update([
             'name' => $validated['name'],
             'email' => $validated['email'],
         ]);
-        
+
         if ($request->filled('password')) {
             $user->update([
                 'password' => Hash::make($validated['password']),
             ]);
         }
-        
+
         if (isset($validated['roles'])) {
             $user->syncRoles($validated['roles']);
         }
