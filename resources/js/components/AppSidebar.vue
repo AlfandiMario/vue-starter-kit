@@ -3,9 +3,9 @@ import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
-import { type NavItem } from '@/types';
+import { NavItemParent, type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
-import { LayoutGrid, UserCog, ShieldPlus, MonitorSpeaker } from 'lucide-vue-next';
+import { LayoutGrid, UserCog, ShieldPlus, MonitorSpeaker, Zap } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { computed } from 'vue';
 
@@ -23,11 +23,29 @@ const canSeeAdminFooter = computed(() => {
     return hasRole('super-admin');
 });
 
-const mainNavItems: NavItem[] = [
+const mainNavItems: NavItemParent[] = [
     {
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+    },
+    {
+        title: 'Electricity',
+        icon: Zap,
+        children: [
+            {
+                title: 'Monitoring',
+                href: '/electricity/monitoring',
+            },
+            {
+                title: 'Control',
+                href: '/electricity/control',
+            },
+            {
+                title: 'Statistics',
+                href: '/electricity/statistics',
+            },
+        ]
     },
     {
         title: 'Devices',
