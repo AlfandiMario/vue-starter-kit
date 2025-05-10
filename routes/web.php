@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\ElectricalController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome');
@@ -22,6 +23,15 @@ Route::middleware(['auth', 'permission:create users'])->group(function () {
 // Roles Management Routes (Super Admin only)
 Route::middleware(['auth', 'permission:create roles'])->group(function () {
     Route::resource('roles', RoleController::class);
+});
+
+// Electricity System
+Route::middleware(['auth', 'permission:monitor'])->group(function () {
+    Route::get('electrical', [ElectricalController::class, 'index'])->name('electrical.index');
+    Route::get('electrical/monitor', [ElectricalController::class, 'monitor'])->name('electrical.monitor');
+    Route::get('electrical/control', [ElectricalController::class, 'control'])->name('electrical.control');
+    Route::get('electrical/stats', [ElectricalController::class, 'stats'])->name('electrical.stats');
+    Route::get('electrical/ike', [ElectricalController::class, 'ike'])->name('electrical.ike');
 });
 
 // Device Routes with different permission levels

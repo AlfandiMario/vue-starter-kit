@@ -23,3 +23,5 @@ yarn-error.log
 /.vscode
 /.zed
 *.txt
+resources/css/app-ori.css
+laravel

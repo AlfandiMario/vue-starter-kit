@@ -30,20 +30,24 @@ const mainNavItems: NavItemParent[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Electricity',
+        title: 'Electrical',
         icon: Zap,
         children: [
             {
                 title: 'Monitoring',
-                href: '/electricity/monitoring',
+                href: '/electrical/monitor',
             },
             {
                 title: 'Control',
-                href: '/electricity/control',
+                href: '/electrical/control',
             },
             {
                 title: 'Statistics',
-                href: '/electricity/statistics',
+                href: '/electrical/stats',
+            },
+            {
+                title: 'IKE Standard',
+                href: '/electrical/ike',
             },
         ]
     },

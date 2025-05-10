@@ -37,6 +37,10 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'control devices']);
         Permission::create(['name' => 'view devices']);
 
+        // Monitor or Control
+        Permission::create(['name' => 'monitor']);
+        Permission::create(['name' => 'control']);
+
         // Create roles and assign permissions
         $superAdminRole = Role::create(['name' => 'super-admin']);
         // Super admin gets all permissions
